@@ -1,17 +1,15 @@
 import unittest
-from faker import Faker
 from tests import Fixtures
 from validationpy.results.validation_result import ValidationResult
 
 
 class TestValidationResult(unittest.TestCase):
     def setUp(self) -> None:
-        self.faker = Faker()
-        self.fixture = Fixtures(self.faker)
+        self.fixtures = Fixtures()
 
-    def test_init_shouldSetPropertiesAsExpected(self):
+    def test_init_should_set_attributes(self):
         # Arrange
-        errors = [self.fixture.validation_error(), self.fixture.validation_error(), None]
+        errors = [self.fixtures.validation_error(), self.fixtures.validation_error(), None]
 
         # Act
         result = ValidationResult(errors)
@@ -19,7 +17,7 @@ class TestValidationResult(unittest.TestCase):
         # Assert
         self.assertListEqual([errors[0], errors[1]], result.errors)
 
-    def test_init_whenErrorsIsNone_shouldSetErrorsAsEmptyList(self):
+    def test_init_should_set_errors_empty_when_errors_is_none(self):
         # Arrange
         errors = None
 
@@ -30,23 +28,26 @@ class TestValidationResult(unittest.TestCase):
         self.assertIsNotNone(result.errors)
         self.assertFalse(result.errors)
 
-    def test_isValid_whenEmptyErrors_shouldReturnFalse(self):
+    def test_is_valid_should_return_false_when_empty_errors(self):
         # Arrange
         result = ValidationResult(None)
 
         # Assert
         self.assertFalse(result.is_valid)
 
-    def test_isValid_whenAnyErrors_shouldReturnTrue(self):
+    def test_is_valid_should_return_true_when_any_errors(self):
         # Arrange
-        result = ValidationResult([self.fixture.validation_error()])
+        result = ValidationResult([self.fixtures.validation_error()])
 
         # Assert
         self.assertTrue(result.is_valid)
 
-    def test_str_shouldReturnExpected(self):
+    def test_str_should_return_custom(self):
         # Arrange
-        result = ValidationResult([self.fixture.validation_error(), self.fixture.validation_error()])
+        result = ValidationResult([
+            self.fixtures.validation_error(),
+            self.fixtures.validation_error()
+        ])
         expected_message = f"{str(result.errors[0])}\n{str(result.errors[1])}"
 
         # Assert

@@ -79,7 +79,7 @@ class ValidationError:
         -------
         str | None
             The code associated with the error.
-            Or None if not set
+            Or None if not set.
         """
 
         return self._code

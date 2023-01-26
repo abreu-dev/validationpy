@@ -1,5 +1,5 @@
 """
-ValidationResult module
+ValidationResult module.
 """
 
 from validationpy.results.validation_error import ValidationError
@@ -7,7 +7,7 @@ from validationpy.results.validation_error import ValidationError
 
 class ValidationResult:
     """
-    The result of a validator
+    The result of a validator.
 
     Attributes
     ----------
@@ -41,8 +41,8 @@ class ValidationResult:
         Returns
         -------
         bool
-            False when length of errors is zero
-            True when length of errors is greater than zero
+            False when length of errors is zero.
+            True when length of errors is greater than zero.
         """
 
         return len(self._errors) > 0
