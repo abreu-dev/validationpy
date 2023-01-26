@@ -10,7 +10,7 @@ ObjectT = TypeVar("ObjectT")
 
 class ValidationState(Generic[ObjectT]):
     """
-    The state of a validation.
+    The state of a validation of any object.
 
     Attributes
     ----------
@@ -21,9 +21,6 @@ class ValidationState(Generic[ObjectT]):
     """
 
     def __init__(self, object_to_validate: ObjectT) -> None:
-        if object_to_validate is None:
-            raise ValueError("Object to validate must not be None")
-
         self._object_to_validate: ObjectT = object_to_validate
         self._errors: list[ValidationError] = []
 
@@ -44,7 +41,6 @@ class ValidationState(Generic[ObjectT]):
         """
         Returns
         -------
-
         list[ValidationError]
             A collection of errors.
         """
@@ -56,7 +52,6 @@ class ValidationState(Generic[ObjectT]):
         """
         Returns
         -------
-
         ObjectT
             Object being validated.
         """

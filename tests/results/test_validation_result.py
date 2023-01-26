@@ -1,15 +1,16 @@
 import unittest
-from tests import Fixtures
+from faker import Faker
+from validationpy.results.validation_error import ValidationError
 from validationpy.results.validation_result import ValidationResult
 
 
 class TestValidationResult(unittest.TestCase):
     def setUp(self) -> None:
-        self.fixtures = Fixtures()
+        self.faker = Faker()
 
     def test_init_should_set_attributes(self):
         # Arrange
-        errors = [self.fixtures.validation_error(), self.fixtures.validation_error(), None]
+        errors = [ValidationError("", "", ""), ValidationError("", "", ""), None]
 
         # Act
         result = ValidationResult(errors)
@@ -37,7 +38,7 @@ class TestValidationResult(unittest.TestCase):
 
     def test_is_valid_should_return_true_when_any_errors(self):
         # Arrange
-        result = ValidationResult([self.fixtures.validation_error()])
+        result = ValidationResult([ValidationError("", "", "")])
 
         # Assert
         self.assertTrue(result.is_valid)
@@ -45,8 +46,8 @@ class TestValidationResult(unittest.TestCase):
     def test_str_should_return_custom(self):
         # Arrange
         result = ValidationResult([
-            self.fixtures.validation_error(),
-            self.fixtures.validation_error()
+            ValidationError("", "Message1", ""),
+            ValidationError("", "Message2", "")
         ])
         expected_message = f"{str(result.errors[0])}\n{str(result.errors[1])}"
 

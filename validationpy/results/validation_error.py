@@ -11,21 +11,21 @@ class ValidationError:
 
     Attributes
     ----------
-    _property_name : str
-        The name of the property.
-    _message : str
+    _attribute_name: str
+        The name of the attribute.
+    _message: str
         The error message.
-    _attempted_value : Any
-        The property value that caused the error.
-    _code : str | None, default None
+    _attempted_value: Any
+        The attribute value that caused the error.
+    _code: str | None, default None
         The code associated with the error.
-    _template_placeholders : dict[str, str], default {}
+    _template_placeholders: dict[str, str], default {}
         The placeholders used with the message.
     """
 
-    def __init__(self, property_name: str, message: str, attempted_value: Any) -> None:
-        if not isinstance(property_name, str):
-            raise ValueError(f"Property name must be of type {str}")
+    def __init__(self, attribute_name: str, message: str, attempted_value: Any) -> None:
+        if not isinstance(attribute_name, str):
+            raise ValueError(f"Attribute name must be of type {str}")
 
         if not isinstance(message, str):
             raise ValueError(f"Message must be of type {str}")
@@ -33,22 +33,22 @@ class ValidationError:
         if attempted_value is None:
             raise ValueError("Attempted value must not be None")
 
-        self._property_name: str = property_name
+        self._attribute_name: str = attribute_name
         self._message: str = message
         self._attempted_value: Any = attempted_value
         self._code: str | None = None
         self._template_placeholders: dict[str, str] = {}
 
     @property
-    def property_name(self) -> str:
+    def attribute_name(self) -> str:
         """
         Returns
         -------
         str
-            The name of the property.
+            The name of the attribute.
         """
 
-        return self._property_name
+        return self._attribute_name
 
     @property
     def message(self) -> str:
@@ -67,7 +67,7 @@ class ValidationError:
         Returns
         -------
         Any
-            The property value that caused the error.
+            The attribute value that caused the error.
         """
 
         return self._attempted_value

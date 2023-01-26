@@ -11,7 +11,7 @@ class ValidationResult:
 
     Attributes
     ----------
-    _errors : list[ValidationError]
+    _errors: list[ValidationError]
         A collection of errors.
     """
 
@@ -26,7 +26,6 @@ class ValidationResult:
         """
         Returns
         -------
-
         list[ValidationError]
             A collection of errors.
         """
