@@ -8,7 +8,6 @@ from validationpy.rules.not_empty_rule import NotEmptyRule
 class TestNotEmptyRule(unittest.TestCase):
     def setUp(self) -> None:
         self.faker = Faker()
-
         self.product = mock_product(self.faker)
 
     # region is_valid

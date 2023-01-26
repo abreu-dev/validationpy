@@ -74,11 +74,6 @@ class Product:
 def mock_product(faker: Faker):
     product_identifier = faker.pyint(min_value=1)
 
-    countries = [faker.unique.country() for _ in range(faker.pyint(min_value=1, max_value=5))]
-    locale_names = {}
-    for country in countries:
-        locale_names[country] = faker.name()
-
     return Product().construct(
         product_identifier,
         faker.name(),
@@ -86,8 +81,8 @@ def mock_product(faker: Faker):
         faker.pybool(),
         faker.pyfloat(min_value=0.1),
         (faker.pyfloat(min_value=0.1), faker.currency_code()),
-        [mock_order(product_identifier, faker) for _ in range(faker.pyint(min_value=1, max_value=5))],
-        locale_names,
+        mock_orders(product_identifier, faker, 5),
+        mock_locale_names(faker, 5),
         faker.date(),
         faker.enum(Category),
         Package().construct(faker.name()))
@@ -96,3 +91,14 @@ def mock_product(faker: Faker):
 def mock_order(product_identifier: int, faker: Faker):
     return Order().construct(product_identifier, faker.pyint(min_value=1))
 
+
+def mock_orders(product_identifier: int, faker: Faker, many: int):
+    return [mock_order(product_identifier, faker) for _ in range(faker.pyint(min_value=1, max_value=many))]
+
+
+def mock_locale_names(faker: Faker, many: int):
+    countries = [faker.unique.country() for _ in range(faker.pyint(min_value=1, max_value=many))]
+    locale_names = {}
+    for country in countries:
+        locale_names[country] = faker.name()
+    return locale_names
