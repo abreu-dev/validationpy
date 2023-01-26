@@ -93,11 +93,13 @@ def mock_order(product_identifier: int, faker: Faker):
 
 
 def mock_orders(product_identifier: int, faker: Faker, many: int):
-    return [mock_order(product_identifier, faker) for _ in range(faker.pyint(min_value=1, max_value=many))]
+    return [mock_order(product_identifier, faker)
+            for _ in range(faker.pyint(min_value=1, max_value=many))]
 
 
 def mock_locale_names(faker: Faker, many: int):
-    countries = [faker.unique.country() for _ in range(faker.pyint(min_value=1, max_value=many))]
+    countries = [faker.unique.country()
+                 for _ in range(faker.pyint(min_value=1, max_value=many))]
     locale_names = {}
     for country in countries:
         locale_names[country] = faker.name()

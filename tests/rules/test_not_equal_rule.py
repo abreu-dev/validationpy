@@ -169,7 +169,8 @@ class TestNotEqualRule(unittest.TestCase):
         template = rule.get_template_message()
 
         # Assert
-        self.assertEqual("'$attribute_name' must not be equal to '$comparison_value'", template.template)
+        self.assertEqual("'$attribute_name' must not be equal to '$comparison_value'",
+                         template.template)
     # endregion
 
 

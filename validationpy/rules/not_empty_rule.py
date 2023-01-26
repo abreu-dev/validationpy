@@ -20,7 +20,7 @@ class NotEmptyRule(AttributeRule[ObjectT, AttributeT]):
         if value is None:
             return False
 
-        if type(value) == str:
+        if isinstance(value, str):
             return bool(value) and bool(value.strip())
 
         return value != type(value)()
