@@ -1,5 +1,5 @@
 """
-AttributeRule module.
+AbstractRule module.
 """
 
 from abc import abstractmethod
@@ -11,13 +11,13 @@ ObjectT = TypeVar("ObjectT")
 AttributeT = TypeVar("AttributeT")
 
 
-class AttributeRule(Generic[ObjectT, AttributeT]):
+class AbstractRule(Generic[ObjectT, AttributeT]):
     """
-    The abstract class of an attribute rule of any object and attribute.
+    The abstract class of a rule for any object and attribute.
     """
 
     @abstractmethod
-    def is_valid(self, state: ValidationState[ObjectT], value: AttributeT) -> bool:
+    def validate(self, state: ValidationState[ObjectT], value: AttributeT) -> bool:
         """
         Validates a specific attribute value.
 

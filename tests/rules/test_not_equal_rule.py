@@ -10,9 +10,9 @@ class TestNotEqualRule(unittest.TestCase):
         self.faker = Faker()
         self.product = mock_product(self.faker)
 
-    # region is_valid
+    # region validate
     # region StringTypes
-    def test_is_valid_should_return_true_when_equal_str(self):
+    def test_validate_should_return_true_when_equal_str(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState(object_to_validate)
@@ -20,10 +20,10 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, str](value_to_compare)
 
         # Act & Assert
-        self.assertTrue(rule.is_valid(state, self.product.name))
+        self.assertTrue(rule.validate(state, self.product.name))
         self.assertFalse('comparison_value' in state.message_constructor.placeholders.keys())
 
-    def test_is_valid_should_return_false_when_not_equal_str(self):
+    def test_validate_should_return_false_when_not_equal_str(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState(object_to_validate)
@@ -31,12 +31,12 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, str](value_to_compare)
 
         # Act & Assert
-        self.assertFalse(rule.is_valid(state, self.product.name))
+        self.assertFalse(rule.validate(state, self.product.name))
         self.assertEqual(value_to_compare, state.message_constructor.placeholders['comparison_value'])
     # endregion
 
     # region NumericTypes
-    def test_is_valid_should_return_true_when_equal_int(self):
+    def test_validate_should_return_true_when_equal_int(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState(object_to_validate)
@@ -44,10 +44,10 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, int](value_to_compare)
 
         # Act & Assert
-        self.assertTrue(rule.is_valid(state, self.product.identifier))
+        self.assertTrue(rule.validate(state, self.product.identifier))
         self.assertFalse('comparison_value' in state.message_constructor.placeholders.keys())
 
-    def test_is_valid_should_return_false_when_not_equal_int(self):
+    def test_validate_should_return_false_when_not_equal_int(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState(object_to_validate)
@@ -55,10 +55,10 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, int](value_to_compare)
 
         # Act & Assert
-        self.assertFalse(rule.is_valid(state, self.product.identifier))
+        self.assertFalse(rule.validate(state, self.product.identifier))
         self.assertEqual(value_to_compare, state.message_constructor.placeholders['comparison_value'])
 
-    def test_is_valid_should_return_true_when_equal_float(self):
+    def test_validate_should_return_true_when_equal_float(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState(object_to_validate)
@@ -66,10 +66,10 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, float](value_to_compare)
 
         # Act & Assert
-        self.assertTrue(rule.is_valid(state, self.product.quantity_available))
+        self.assertTrue(rule.validate(state, self.product.quantity_available))
         self.assertFalse('comparison_value' in state.message_constructor.placeholders.keys())
 
-    def test_is_valid_should_return_false_when_not_equal_float(self):
+    def test_validate_should_return_false_when_not_equal_float(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState(object_to_validate)
@@ -77,10 +77,10 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, float](value_to_compare)
 
         # Act & Assert
-        self.assertFalse(rule.is_valid(state, self.product.quantity_available))
+        self.assertFalse(rule.validate(state, self.product.quantity_available))
         self.assertEqual(value_to_compare, state.message_constructor.placeholders['comparison_value'])
 
-    def test_is_valid_should_return_true_when_equal_complex(self):
+    def test_validate_should_return_true_when_equal_complex(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState(object_to_validate)
@@ -88,10 +88,10 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, complex](value_to_compare)
 
         # Act & Assert
-        self.assertTrue(rule.is_valid(state, 1+1j))
+        self.assertTrue(rule.validate(state, 1 + 1j))
         self.assertFalse('comparison_value' in state.message_constructor.placeholders.keys())
 
-    def test_is_valid_should_return_false_when_not_equal_complex(self):
+    def test_validate_should_return_false_when_not_equal_complex(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState(object_to_validate)
@@ -99,12 +99,12 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, complex](value_to_compare)
 
         # Act & Assert
-        self.assertFalse(rule.is_valid(state, 1+1j))
+        self.assertFalse(rule.validate(state, 1 + 1j))
         self.assertEqual(value_to_compare, state.message_constructor.placeholders['comparison_value'])
     # endregion
 
     # region SequenceTypes
-    def test_is_valid_should_return_true_when_equal_list(self):
+    def test_validate_should_return_true_when_equal_list(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState(object_to_validate)
@@ -112,10 +112,10 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, list](value_to_compare)
 
         # Act & Assert
-        self.assertTrue(rule.is_valid(state, self.product.orders))
+        self.assertTrue(rule.validate(state, self.product.orders))
         self.assertFalse('comparison_value' in state.message_constructor.placeholders.keys())
 
-    def test_is_valid_should_return_false_when_not_equal_list(self):
+    def test_validate_should_return_false_when_not_equal_list(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState[Product](object_to_validate)
@@ -123,10 +123,10 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, list](value_to_compare)
 
         # Act & Assert
-        self.assertFalse(rule.is_valid(state, self.product.orders))
+        self.assertFalse(rule.validate(state, self.product.orders))
         self.assertEqual(value_to_compare, state.message_constructor.placeholders['comparison_value'])
 
-    def test_is_valid_should_return_true_when_equal_tuple(self):
+    def test_validate_should_return_true_when_equal_tuple(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState[Product](object_to_validate)
@@ -134,10 +134,10 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, tuple](value_to_compare)
 
         # Act & Assert
-        self.assertTrue(rule.is_valid(state, self.product.currency))
+        self.assertTrue(rule.validate(state, self.product.currency))
         self.assertFalse('comparison_value' in state.message_constructor.placeholders.keys())
 
-    def test_is_valid_should_return_false_when_not_equal_tuple(self):
+    def test_validate_should_return_false_when_not_equal_tuple(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState[Product](object_to_validate)
@@ -145,12 +145,12 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, tuple](value_to_compare)
 
         # Act & Assert
-        self.assertFalse(rule.is_valid(state, self.product.currency))
+        self.assertFalse(rule.validate(state, self.product.currency))
         self.assertEqual(value_to_compare, state.message_constructor.placeholders['comparison_value'])
     # endregion
 
     # region MappingType
-    def test_is_valid_should_return_true_when_equal_dict(self):
+    def test_validate_should_return_true_when_equal_dict(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState[Product](object_to_validate)
@@ -158,10 +158,10 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, dict](value_to_compare)
 
         # Act & Assert
-        self.assertTrue(rule.is_valid(state, self.product.locale_names))
+        self.assertTrue(rule.validate(state, self.product.locale_names))
         self.assertFalse('comparison_value' in state.message_constructor.placeholders.keys())
 
-    def test_is_valid_should_return_false_when_not_equal_dict(self):
+    def test_validate_should_return_false_when_not_equal_dict(self):
         # Arrange
         object_to_validate = self.product
         state = ValidationState[Product](object_to_validate)
@@ -169,7 +169,7 @@ class TestNotEqualRule(unittest.TestCase):
         rule = NotEqualRule[Product, dict](value_to_compare)
 
         # Act & Assert
-        self.assertFalse(rule.is_valid(state, self.product.locale_names))
+        self.assertFalse(rule.validate(state, self.product.locale_names))
         self.assertEqual(value_to_compare, state.message_constructor.placeholders['comparison_value'])
     # endregion
     # endregion

@@ -5,13 +5,13 @@ NotEmptyRule module.
 from string import Template
 from typing import TypeVar
 from validationpy.results.validation_state import ValidationState
-from validationpy.rules.attribute_rule import AttributeRule
+from validationpy.rules.abstract_rule import AbstractRule
 
 ObjectT = TypeVar("ObjectT")
 AttributeT = TypeVar("AttributeT")
 
 
-class NotEqualRule(AttributeRule[ObjectT, AttributeT]):
+class NotEqualRule(AbstractRule[ObjectT, AttributeT]):
     """
     Defines a not equal rule for any attribute type.
 
@@ -24,7 +24,7 @@ class NotEqualRule(AttributeRule[ObjectT, AttributeT]):
     def __init__(self, value_to_compare: AttributeT) -> None:
         self._value_to_compare = value_to_compare
 
-    def is_valid(self, state: ValidationState[ObjectT], value: AttributeT) -> bool:
+    def validate(self, state: ValidationState[ObjectT], value: AttributeT) -> bool:
         success = not value == self._value_to_compare
 
         if not success:

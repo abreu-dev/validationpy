@@ -5,18 +5,18 @@ NotEmptyRule module.
 from string import Template
 from typing import TypeVar
 from validationpy.results.validation_state import ValidationState
-from validationpy.rules.attribute_rule import AttributeRule
+from validationpy.rules.abstract_rule import AbstractRule
 
 ObjectT = TypeVar("ObjectT")
 AttributeT = TypeVar("AttributeT")
 
 
-class NotEmptyRule(AttributeRule[ObjectT, AttributeT]):
+class NotEmptyRule(AbstractRule[ObjectT, AttributeT]):
     """
     Defines a not empty rule for any attribute type.
     """
 
-    def is_valid(self, state: ValidationState[ObjectT], value: AttributeT) -> bool:
+    def validate(self, state: ValidationState[ObjectT], value: AttributeT) -> bool:
         if value is None:
             return False
 
