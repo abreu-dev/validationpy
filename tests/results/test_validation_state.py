@@ -21,6 +21,8 @@ class TestValidationState(unittest.TestCase):
         self.assertEqual(object_to_validate, state.object_to_validate)
         self.assertIsNotNone(state.errors)
         self.assertFalse(state.errors)
+        self.assertIsNotNone(state.message_constructor)
+        self.assertIsNotNone(state.attribute_chain)
 
     def test_add_error_should_add_to_list(self):
         # Arrange

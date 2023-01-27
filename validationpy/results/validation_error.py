@@ -19,25 +19,16 @@ class ValidationError:
         The attribute value that caused the error.
     _code: str | None, default None
         The code associated with the error.
-    _template_placeholders: dict[str, str], default {}
+    _template_placeholders: dict[str, Any], default {}
         The placeholders used with the message.
     """
 
     def __init__(self, attribute_name: str, message: str, attempted_value: Any) -> None:
-        if not isinstance(attribute_name, str):
-            raise ValueError(f"Attribute name must be of type {str}")
-
-        if not isinstance(message, str):
-            raise ValueError(f"Message must be of type {str}")
-
-        if attempted_value is None:
-            raise ValueError("Attempted value must not be None")
-
         self._attribute_name: str = attribute_name
         self._message: str = message
         self._attempted_value: Any = attempted_value
         self._code: str | None = None
-        self._template_placeholders: dict[str, str] = {}
+        self._template_placeholders: dict[str, Any] = {}
 
     @property
     def attribute_name(self) -> str:
@@ -89,7 +80,7 @@ class ValidationError:
         """
         Returns
         -------
-        dict[str, str]
+        dict[str, Any]
             The placeholders used with the message.
         """
 

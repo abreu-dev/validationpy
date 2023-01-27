@@ -1,5 +1,5 @@
 """
-PropertyRule module.
+AttributeRule module.
 """
 
 from abc import abstractmethod
