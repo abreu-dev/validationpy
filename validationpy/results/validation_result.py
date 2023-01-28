@@ -48,4 +48,4 @@ class ValidationResult:
 
     def __str__(self) -> str:
         separator: str = "\n"
-        return separator.join(list(map(lambda error: error.message, self._errors)))
+        return separator.join(list(map(lambda error: str(error), self._errors)))
